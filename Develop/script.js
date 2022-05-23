@@ -101,7 +101,7 @@ var specialCharacters = [
 
 
 // function to generate password
-function generatePassword() {
+function getCharacterType() {
   // prompt for length of password between 8 and 128 characters
   var length = parseInt(
     window.prompt("How long would you like the password to be? Minimum of 8 and maximum of 128 characters required.")
@@ -110,17 +110,17 @@ function generatePassword() {
   // if length does not meet requirements
   if (length < 8) {
       window.alert("Must be at least 8 characters. Try again.");
-      return generatePassword();
+      return getCharacterType();
   };
 
   if (length > 128) {
       window.alert("Must be fewer than 128 characters. Try again.");
-      return generatePassword();
+      return getCharacterType();
   };
   // if user input is NaN, prompt user to enter a number
   if(isNaN(length)) {
     window.alert("Please enter a number.");
-    return generatePassword();
+    return getCharacterType();
   };
   console.log("Password is " + length + " characters long.")
 
@@ -161,9 +161,11 @@ function generatePassword() {
   };
 
   // create password based on user prompts
-  // if && statements
+  // if user does not select any character type statement
 
-  
+  // 
+
+
 };
 
 
