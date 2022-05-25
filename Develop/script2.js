@@ -75,7 +75,7 @@ var lowerCase = [
 
 // special characters array
 
-var specialCharacters = [
+var specialChar = [
   "!",
   "@",
   "#", 
@@ -98,14 +98,11 @@ var specialCharacters = [
   "/"
 ];
 
-// function to get user input
-// exclude lowercase?
 
 function getCharType() {
   // prompt for length of password between 8 and 128 characters
   var length = parseInt(
-    window.prompt("How long would you like the password to be? Minimum of 8 and maximum of 128 characters required.")
-  );
+    window.prompt("How long would you like the password to be? Minimum of 8 and maximum of 128 characters required."));
 
   // if length does not meet requirements
   if (length < 8 || length > 128) {
@@ -167,66 +164,61 @@ function getCharType() {
     ) {
       window.alert("Please choose at least one option to make your password unique.")
       return getCharType();
-  }
+  };
 
-  // object for user input 
-  var passwordChar = {
+  // object to track user preferences
+  var preferences = {
     length: length,
     upperCase: upperCase,
-    specialCharacters: specialCharacters,
+    lowerCase: lowerCase,
+    specialChar: specialChar,
     numbers: numbers
   };
 
-  return passwordChar;
+  return preferences;
 };
 
 
-// function to randomize element from an array
-function random(array) {
-  var randomEl = Math.floor(Math.random(array));
-  return randomEl;
-};
-
+// generate password function
 function generatePassword() {
+  var userPreference = getCharType();
+  var preferredChar = []; 
+  var otherChar = [];
+
+  // call to preferences object
+  // add character type to rand
+  // random lowercase
   
-  // if user prefers type, add it to array of possible characters which starts as emtpy
-  var preferences = getCharType();  
+  function passLength() {
+    if (userPreference.lowerCase) {
+      var randEl = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+      preferredChar.push(randEl);
+    };
+  
+      // random uppercase
+    if (userPreference.upperCase) {
+      var randEl = upperCase[Math.floor(Math.random() * upperCase.length)];
+      preferredChar.push(randEl);  
+    };
+    
+    // random number
+    if (userPreference.numbers) {
+      var randEl = numbers[Math.floor(Math.random() * numbers.length)];
+      preferredChar.push(randEl);   
+    };
+    
+    // random special character
+    if (userPreference.specialChar) {
+      var randEl = specialChar[Math.floor(Math.random() * specialChar.length)];
+      preferredChar.push(randEl);
+    };
+  
+    console.log(preferredChar);
+    console.log(preferredChar.join(''));
+  }
 
-  var possibleChar = [];
-  var guaranteedChar = [];
-
-  if (preferences.numbers) {
-   possibleChar = possibleChar.concat(numbers);
-   guaranteedChar.push(random(possibleChar));
-  };
-
-  if (preferences.upperCase) {
-    possibleChar = possibleChar.concat(upperCase);
-    guaranteedChar.push(random(possibleChar));
-  };
-
-  if (preferences.specialCharacters) {
-    possibleChar = possibleChar.concat(specialCharacters);
-    guaranteedChar.push(random(possibleChar));
-  };
-
-  console.log(possibleChar);
-  console.log(guaranteedChar);
-
-
-  // for loop; 
-
-  for (i=0; i < preferences.length; i++) {
-    var possibleChar = random(possibleChar);
-  };
-
-  for (i=0; i < possibleChar.length; i++) {
-    var guaranteedChar = random(guaranteedChar);
-  };
-};
-
-
-
+  passLength();
+}; // end of generate password function
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -235,10 +227,8 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
