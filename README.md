@@ -1,7 +1,9 @@
 # Password Generator
 
 ## Features
-Generate a unique password to include user's preferance of:
-- Length
-- Character type
-- Lowercase/uppercase letters
+From starter code, write an algorithm that generates a unique password of a particular length.
+User may request to include:
+- Numbers
+- Special character type
+- Lowercase letters
+- Uppercase letters
