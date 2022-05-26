@@ -7,3 +7,6 @@ User may request to include:
 - Special character type
 - Lowercase letters
 - Uppercase letters
+
+### Link
+https://kfisch2.github.io/password-generator/
